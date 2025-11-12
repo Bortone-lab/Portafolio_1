@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Juan Carlos Colin Medina - Portafolio de Ciencia de Datos</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #005f73;
+            --secondary-color: #0077b6;
+            --accent-gold: #d4af37;
+            --accent-blue: #0f4c75;
+            --accent-red: #8b0000;
+            --accent-green: #2e8b57;
+            --light-bg: #f4f4f4;
+            --card-bg: #fff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header, section {
+            margin-bottom: 40px;
+        }
+        
+        h1, h2 {
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .proyecto {
+            margin-top: 15px;
+            display: none; 
+        }
+        
+        /* Botones mejorados */
+        .btn, .btn-proyecto-oro, .btn-proyecto-nuevo, .btn-proyecto-churn, .btn-proyecto-seguros {
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn {
+            background-color: var(--secondary-color);
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-proyecto-oro {
+            background: linear-gradient(45deg, #bfae60, var(--accent-gold));
+        }
+        
+        .btn-proyecto-oro:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--accent-gold), #bfae60);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-proyecto-nuevo {
+            background: linear-gradient(45deg, #1b4965, var(--accent-blue));
+        }
+        
+        .btn-proyecto-nuevo:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--accent-blue), #1b4965);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-proyecto-churn {
+            background: linear-gradient(45deg, #a52a2a, var(--accent-red));
+        }
+        
+        .btn-proyecto-churn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--accent-red), #a52a2a);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-proyecto-seguros {
+            background: linear-gradient(45deg, #2d6a4f, var(--accent-green));
+        }
+        
+        .btn-proyecto-seguros:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--accent-green), #2d6a4f);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .contacto p {
+            margin: 5px 0;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .imagen-proyecto {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .descripcion-librerias {
+            background-color: #fff8dc;
+            border-left: 6px solid var(--accent-gold);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 0.95em;
+        }
+        
+        .nota-critica {
+            background-color: #ffe5e5; 
+            border: 2px solid #cc0000; 
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .nota-critica h3 {
+            color: #cc0000;
+        }
+        
+        .skills-header {
+            background-color: #e6f7ff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid var(--secondary-color);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .math-formula {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--secondary-color);
+            overflow-x: auto;
+        }
+        
+        .math-inline {
+            display: inline-block;
+            margin: 0 2px;
+        }
+        
+        .metricas-destacadas {
+            background-color: #e6f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .flex-item {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tarea {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .tarea h4 {
+            margin-top: 0;
+            color: var(--accent-green);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .btn, .btn-proyecto-oro, .btn-proyecto-nuevo, .btn-proyecto-churn, .btn-proyecto-seguros {
+                max-width: 100%;
+            }
+            
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <script>
+        function toggleProyecto(id) {
+            const elemento = document.getElementById(id);
+            elemento.style.display = (elemento.style.display === 'none' || elemento.style.display === '') ? 'block' : 'none';
+        }
+        
+        // Configuración de MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Juan Carlos Colin Medina</h1>
+            <p><strong>Ingeniero Químico | Científico de Datos</strong></p>
+            <p>Especialista en modelado matemático, simulación de procesos industriales y machine learning.</p>
+            
+            <div class="skills-header">
+                <strong>Habilidades Clave:</strong> Python (Pandas, Scikit-learn), SQL, Machine Learning (Series de Tiempo, Regresión), Visualización (Plotly, Matplotlib), Ingeniería Química.
+            </div>
+        </header>
+
+        <section>
+            <h2>🔍 Sobre mí</h2>
+            <div class="card">
+                <p>Soy <strong>Científico de Datos</strong> con formación en <strong>Ingeniería Química</strong>, especializado en análisis estadístico, programación y automatización de procesos. Manejo avanzado de <strong>Python, SQL y machine learning</strong>. He impartido capacitación en Excel, tutorías en matemáticas y participado en proyectos de gestión administrativa y análisis de capital. Me distingue una mentalidad proactiva, disciplina personal y compromiso con el trabajo colaborativo.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>📁 Proyectos destacados</h2>
+
+            <button class="btn-proyecto-oro" onclick="toggleProyecto('proyecto1')">⚗️💰 Extracción de Oro y Modelado Metalúrgico</button>
+
+            <div class="card proyecto" id="proyecto1">
+                <p>Este proyecto simula el proceso de extracción y purificación de oro a partir de minerales, utilizando técnicas de análisis de datos y machine learning.</p>
+
+                <div class="descripcion-librerias">
+                    <h4>🧪 Herramientas utilizadas</h4>
+                    <p>El análisis fue desarrollado en <strong>Python</strong>, empleando:</p>
+                    <ul>
+                        <li><strong>Pandas</strong> y <strong>NumPy</strong> para manipulación y análisis de datos</li>
+                        <li><strong>Matplotlib</strong>, <strong>Seaborn</strong> y <strong>Plotly</strong> para visualización gráfica</li>
+                        <li><strong>Scikit-learn</strong> para entrenamiento, validación y evaluación de modelos de machine learning</li>
+                    </ul>
+                </div>
+
+                <h3>🪙 Concentración de Oro (Au)</h3>
+                <div class="flex-container">
+                    <img src="concentracion_de_au.png" alt="Concentración de Oro" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p><strong>Mediana Au - Feed:</strong> 7.44</p>
+                        <p><strong>Mediana Au - Rougher:</strong> 19.64</p>
+                        <p><strong>Mediana Au - Final:</strong> 44.50</p>
+                        <p>La concentración de oro aumenta en cada etapa del proceso, lo que indica una purificación progresiva y efectiva del metal.</p>
+                    </div>
+                </div>
+
+                <h3>🥈 Concentración de Plata (Ag)</h3>
+                <div class="flex-container">
+                    <img src="concentracion_de_ag.png" alt="Concentración de Plata" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p><strong>Mediana Ag - Feed:</strong> 7.94</p>
+                        <p><strong>Mediana Ag - Rougher:</strong> 11.46</p>
+                        <p><strong>Mediana Ag - Final:</strong> 4.87</p>
+                        <p>La concentración de plata aumenta en la etapa intermedia pero disminuye en la final, lo que sugiere que el proceso no está optimizado para retener Ag en el concentrado final.</p>
+                    </div>
+                </div>
+
+                <h3>⚙️ Concentración de Plomo (Pb)</h3>
+                <div class="flex-container">
+                    <img src="concentracion_de_pb.png" alt="Concentración de Plomo" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p><strong>Mediana Pb - Feed:</strong> 3.30</p>
+                        <p><strong>Mediana Pb - Rougher:</strong> 7.58</p>
+                        <p><strong>Mediana Pb - Final:</strong> 10.07</p>
+                        <p>El plomo muestra una mejora sostenida en su concentración a lo largo del proceso, con mayor estabilidad en la etapa final, lo que indica una purificación efectiva y controlada.</p>
+                    </div>
+                </div>
+
+                <h3>📊 Concentración total por etapas</h3>
+                <div class="flex-container">
+                    <img src="totalcon.png" alt="Concentración total por etapas" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p>El análisis de las distribuciones de concentración total, calculadas como la suma de las concentraciones de Au (oro), Ag (plata), Pb (plomo) y sol (sólidos o otro componente) en cada etapa del proceso, revela un comportamiento esperado y consistente con un proceso de concentración efectivo.</p>
+                        <p>El comportamiento de las concentraciones totales valida la eficiencia del proceso de flotación, mostrando un enriquecimiento progresivo y una reducción de la variabilidad del producto a medida que avanza por las etapas rougher y final.</p>
+                    </div>
+                </div>
+
+                <h3>🔬 Tamaño de partículas</h3>
+                <div class="flex-container">
+                    <img src="tamaño.png" alt="Tamaño de partículas" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p>Los tamaños de partículas son similares en mediana, pero presentan valores extremos. Esto indica que, aunque el proceso es consistente en promedio, hay variabilidad que podría influir en la eficiencia de separación.</p>
+                    </div>
+                </div>
+
+                <h3>🤖 Resultados del modelo RandomForest</h3>
+                <div class="flex-container">
+                    <img src="resultados.png" alt="Resultados RandomForest" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p>El modelo <strong>RandomForestRegressor</strong> fue el más preciso entre los evaluados. Obtuvo un MAE promedio de <strong>9.82</strong> y un sMAPE final de <strong>14.85</strong>, superando a modelos como regresión lineal y árboles de decisión. Esto demuestra su capacidad de generalización y bajo error en predicciones.</p>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="toggleProyecto('procesoTecnologico')">📖 Proceso tecnológico</button>
+                <div class="card proyecto" id="procesoTecnologico">
+                    <h3>🔬 ¿Cómo se extrae el oro del mineral?</h3>
+                    <p>El proceso de extracción de oro consta de dos etapas principales: flotación y purificación. El mineral extraído se convierte en alimentación rougher, que pasa por plantas de flotación para obtener concentrado de oro y colas. Luego, el concentrado se purifica en dos etapas para obtener el producto final.</p>
+
+                    <h4>🧪 Etapas del proceso</h4>
+                    <ul>
+                        <li><strong>Flotación:</strong> Se obtiene el concentrado rougher y colas rougher.</li>
+                        <li><strong>Purificación:</strong> Se realiza en dos etapas para obtener el concentrado final.</li>
+                    </ul>
+
+                    <h4>⚙️ Componentes y parámetros</h4>
+                    <ul>
+                        <li><strong>Reactivos:</strong> Xantato (activador), sulfato (sulfuro de sodio), depresante (silicato de sodio).</li>
+                        <li><strong>Variables:</strong> Volumen de aire, niveles de fluido, tamaño y velocidad de alimentación.</li>
+                        <li><strong>Instalaciones:</strong> Float banks (flotación), cleaner process (purificación).</li>
+                    </ul>
+
+                    <h4>📊 Denominación de características</h4>
+                    <p>Formato: <code>[stage].[parameter_type].[parameter_name]</code></p>
+                    <ul>
+                        <li><strong>Stage:</strong> rougher, primary_cleaner, secondary_cleaner, final</li>
+                        <li><strong>Parameter type:</strong> input, output, state, calculation</li>
+                        <li><strong>Ejemplo:</strong> <code>rougher.input.feed_ag</code></li>
+                    </ul>
+
+                    <h4>📈 Fórmula de recuperación</h4>
+                    <div class="math-formula">
+                        <p>La fórmula de recuperación se define como:</p>
+                        \[
+                        \text{Recuperación} = \frac{C \times (F - T)}{F \times (C - T)} \times 100\%
+                        \]
+                        <p>Donde:</p>
+                        <ul>
+                            <li>\( C \) = proporción de oro en el concentrado</li>
+                            <li>\( F \) = proporción de oro en la alimentación</li>
+                            <li>\( T \) = proporción de oro en las colas</li>
+                        </ul>
+                    </div>
+
+                    <h4>📐 Métrica de evaluación: sMAPE</h4>
+                    <div class="math-formula">
+                        <p>La métrica sMAPE (Symmetric Mean Absolute Percentage Error) se calcula como:</p>
+                        \[
+                        \text{sMAPE} = \frac{1}{N} \times \sum_{i=1}^{N} \left[ \frac{|y_{i} - \hat{y}_{i}|}{(|y_{i}| + |\hat{y}_{i}|) / 2} \right] \times 100\%
+                        \]
+                        <p>Donde:</p>
+                        <ul>
+                            <li>\( y_{i} \): valor real</li>
+                            <li>\( \hat{y}_{i} \): valor predicho</li>
+                            <li>\( N \): número de observaciones</li>
+                        </ul>
+                        <p>El sMAPE final se calcula como:</p>
+                        \[
+                        \text{sMAPE}_{\text{final}} = 25\% \times \text{sMAPE}(\text{rougher}) + 75\% \times \text{sMAPE}(\text{final})
+                        \]
+                    </div>
+
+                    <h4>🖼️ Imágenes del proceso</h4>
+                    <img src="pro.png" alt="Proceso de flotación" class="imagen-proyecto">
+                </div>
+            </div>
+
+            <button class="btn-proyecto-nuevo" onclick="toggleProyecto('proyecto2')">💡 Predicción de Acciones (TSLA) con Random Forest</button>
+
+            <div class="card proyecto" id="proyecto2">
+                <p>
+                    Este proyecto se enfoca en predecir el valor de las acciones de <strong>TSLA (Tesla)</strong>, utilizando análisis de series de tiempo y un modelo de <strong>Random Forest</strong> implementado en Python.
+                </p>
+
+                <div class="descripcion-librerias">
+                    <h4>🧪 Herramientas utilizadas</h4>
+                    <p>El análisis fue desarrollado en <strong>Python</strong>, empleando:</p>
+                    <ul>
+                        <li>
+                            <strong>yfinance (yf)</strong>: Para la descarga directa y eficiente de datos históricos de acciones de Yahoo Finance.
+                        </li>
+                        <li>
+                            <strong>NumPy</strong>: Esencial para realizar operaciones numéricas rápidas y manejar arrays de datos de gran tamaño.
+                        </li>
+                        <li>
+                            <strong>Matplotlib</strong> y <strong>Plotly</strong>: Usados para la creación de visualizaciones estáticas y gráficos interactivos de series de tiempo.
+                        </li>
+                        <li>
+                            <strong>RandomForestRegressor (Scikit-learn)</strong>: Implementación del modelo de Machine Learning de Random Forest para predicción de series de tiempo.
+                        </li>
+                        <li>
+                            <strong>Scikit-learn Metrics</strong>: Conjunto de funciones para evaluar el rendimiento de los modelos, incluyendo MAE, MAPE, MSE y \( R^2 \).
+                        </li>
+                    </ul>
+                </div>	
+
+                <hr>
+                
+                <h3>📈 Análisis de Descomposición de Series de Tiempo</h3>
+                <div class="flex-container">
+                    <img src="tende.png" alt="Gráfico de Descomposición de Tendencia, Estacionalidad y Residuo" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p><strong>Tendencia:</strong></p>
+                        <p>El valor general <strong>aumenta con el tiempo</strong>, lo que indica un crecimiento sostenido del fenómeno a largo plazo.</p>
+
+                        <p><strong>Estacionalidad:</strong></p>
+                        <p>Se <strong>repite un patrón regular</strong> cada periodo, señalando ciclos predecibles (como temporadas o hábitos de consumo).</p>
+
+                        <p><strong>Residuo (Ruido):</strong></p>
+                        <p>Lo que queda tras quitar tendencia y estacionalidad es <strong>ruido aleatorio</strong>, sin estructura aparente que pueda ser modelada.</p>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h3>⚙️ Modelo Aplicado: Evaluación de Random Forest</h3>
+                <div class="flex-container">
+                    <img src="resacci.png" alt="Gráfico de Predicciones del Modelo vs Valores Reales" class="imagen-proyecto">
+                    
+                    <div class="flex-item">
+                        <h4>🧪 Métricas de Entrenamiento</h4>
+                        <ul>
+                            <li><strong>MAE (Error Absoluto Medio):</strong> 2.545</li>
+                            <li><strong>MAPE (Error Porcentual Absoluto Medio):</strong> 1.249%</li>
+                            <li><strong>RMSE (Raíz del Error Cuadrático Medio):</strong> 3.668</li>
+                            <li><strong>\( R^2 \) (Coeficiente de Determinación):</strong> 0.998</li>
+                        </ul>
+                        
+                        <h4>🧪 Métricas de Prueba (Test)</h4>
+                        <ul>
+                            <li><strong>MAE (Error Absoluto Medio):</strong> 10.876</li>
+                            <li><strong>MAPE (Error Porcentual Absoluto Medio):</strong> 3.283%</li>
+                            <li><strong>RMSE (Raíz del Error Cuadrático Medio):</strong> 14.063</li>
+                            <li><strong>\( R^2 \) (Coeficiente de Determinación):</strong> 0.952</li>
+                        </ul>
+
+                        <h4>⚖️ Análisis de Overfitting</h4>
+                        <p>Al comparar los conjuntos de entrenamiento y prueba, se observan diferencias controladas:</p>
+                        <ul>
+                            <li><strong>Diferencia MAE (Test - Train):</strong> 8.331</li>
+                            <li><strong>Diferencia MAPE (Test - Train):</strong> 2.034%</li>
+                            <li><strong>Diferencia \( R^2 \) (Train - Test):</strong> 0.046</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="metricas-destacadas">
+                    <h4>📈 Interpretación de Resultados</h4>
+                    <p>
+                        El modelo <strong>Random Forest</strong> demuestra una <strong>excelente capacidad predictiva</strong> en el conjunto de prueba (Test) con un <strong>MAPE de 3.283%</strong> y un <strong>ajuste casi perfecto</strong> (\( R^2 = 0.952 \)). Aunque la pequeña diferencia entre las métricas de entrenamiento y prueba (especialmente el \( R^2 \)) indica un <strong>posible ligero overfitting</strong> (el modelo es casi demasiado bueno en los datos que ya ha visto), el rendimiento en datos nuevos (Test) es lo suficientemente robusto para ser considerado exitoso.
+                    </p>
+                    <ul>
+                        <li>✅ <strong>Precisión Excepcional:</strong> MAPE de prueba es muy inferior al 10%.</li>
+                        <li>✅ <strong>Gran Ajuste:</strong> El \( R^2 \) de prueba cercano a 1.0.</li>
+                    </ul>
+                </div>
+                    
+                <button class="btn" onclick="toggleProyecto('procesoNuevoProyecto')">📖 Metodología y Detalles Técnicos</button>
+            
+                <div class="card proyecto" id="procesoNuevoProyecto">
+                    
+                    <h3>💡 Metodología Utilizada</h3>
+                    <p>
+                        El proceso de modelado de la serie de tiempo se dividió en etapas claras para garantizar la robustez: <strong>adquisición de datos</strong>, <strong>limpieza/preprocesamiento</strong>, <strong>descomposición de serie de tiempo</strong> y, finalmente, el <strong>modelado con Random Forest</strong>.
+                    </p>
+
+                    <h4>🛠️ Pasos Clave</h4>
+                    <ul>
+                        <li><strong>Adquisición de Datos:</strong> Obtención de datos históricos de la acción mediante la API de `yfinance`.</li>
+                        <li><strong>Preprocesamiento:</strong> Manejo de valores nulos (NaN) y ajuste de formatos de fecha.</li>
+                        <li><strong>Creación de Características:</strong> Generación de lag features para capturar la dependencia temporal, esenciales para la predicción.</li>
+                        <li><strong>Entrenamiento y Validación:</strong> Uso de walk-forward validation o validación cruzada para series de tiempo.</li>
+                    </ul>
+
+                    <h4>📐 Métrica de Evaluación</h4>
+                    <p>
+                        La métrica principal utilizada es el <strong>MAPE</strong> (Error Porcentual Absoluto Medio) porque, a diferencia del MAE y RMSE, proporciona un error relativo fácil de interpretar (\( 1.2\% \)), crucial en el ámbito financiero.
+                    </p>
+                    
+                    <hr>
+                    
+                    <div class="nota-critica">
+                        <h3>🚨 Nota Crítica: Sesgos y Eventos Externos</h3>
+                        
+                        <p>
+                            Aunque las métricas de prueba (\( R^2 = 0.952 \), \( \text{MAPE} = 3.283\% \)) sugieren una alta precisión, es fundamental entender que <strong>ningún modelo predice perfectamente el futuro del mercado de valores</strong>. Los modelos pueden "mentirnos" si los datos están sesgados o si ignoramos la influencia de eventos externos.
+                        </p>
+
+                        <h4>Impacto de la Realidad Externa</h4>
+                        <ul>
+                            <li>
+                                <strong>Volatilidad Externa:</strong> Eventos externos como ejemplo, la pandemia de COVID-19, cambios geopolíticos o anuncios de tasas de interés afectan drásticamente el comportamiento del mercado. Estos cambios son inesperados e introducen <strong>volatilidad</strong> que los patrones históricos no pueden anticipar.
+                            </li>
+                            <li>
+                                <strong>Riesgo de Sesgo:</strong> La exclusión de periodos de alta criticidad o el entrenamiento en contextos excesivamente estables puede <strong>sesgar el modelo</strong>, limitando su capacidad de reacción a condiciones de mercado adversas o volátiles.
+                            </li>
+                        </ul>
+                        
+                        <p>
+                            <strong>Conclusión:</strong> Un bajo \( \text{MAPE} \) no es una garantía; solo demuestra que el modelo es bueno prediciendo bajo las condiciones históricas que se le presentaron. La gestión de riesgos en la vida real siempre debe prevalecer sobre la confianza ciega en las métricas de un modelo.
+                        </p>
+                    </div>
+                    <hr>
+                    
+               </div> 
+            </div>
+
+            <button class="btn-proyecto-churn" onclick="toggleProyecto('proyecto3')">📊 Predicción de Cancelación de Clientes (Churn)</button>
+
+            <div class="card proyecto" id="proyecto3">
+                
+                <p>
+                    Este proyecto se centra en predecir la <strong>tasa de cancelación (Churn)</strong> de clientes de Telecom. El objetivo es identificar a los clientes en riesgo para ofrecerles códigos promocionales, planes especiales y otras estrategias de retención. 
+                </p>
+
+                <div class="descripcion-librerias">
+                <h4>🧪 Herramientas utilizadas</h4>
+                <p>El análisis fue desarrollado en <strong>Python</strong>, empleando:</p>
+                <ul>
+                    <li>
+                        <strong>Pandas</strong> y <strong>Seaborn</strong>: Para la limpieza, fusión, análisis exploratorio (EDA) y visualización de los cuatro conjuntos de datos de clientes (`contract`, `personal`, `internet`, `phone`).
+                    </li>
+                    <li>
+                        <strong>CatBoostClassifier</strong>: Modelo de <strong>Clasificación</strong> robusto, elegido por su eficiencia en datos tabulares y manejo automático de variables categóricas.
+                    </li>
+                    <li>
+                        <strong>Scikit-learn</strong>: Para la división de datos (`train_test_split`), optimización de hiperparámetros (`GridSearchCV`) y las métricas de evaluación.
+                    </li>
+                    <li>
+                        <strong>Métricas Clave</strong>: <strong>ROC AUC</strong>, `accuracy_score`, `confusion_matrix` y `RocCurveDisplay`.
+                    </li>
+                </ul>
+               </div>	
+
+                <hr>
+                
+                <h3>🔍 Análisis de Duración de Clientes</h3>
+                <div class="flex-container">
+                    <img src="tiempo.png" alt="Churn por tipo de contrato" class="imagen-proyecto">
+                    <div class="flex-item">
+                        <p><strong>Usuarios activos:</strong></p>
+                        <p>La mayoría de los usuarios que abandonaron Telecom lo hicieron durante el primer año, concentrándose especialmente en los primeros 10 meses.</p>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h3>⚙️ Modelo Aplicado: Evaluación de CatBoostClassifier</h3>
+                <div class="grid-2">
+                    <img src="matrix.png" alt="Matriz de Confusión del modelo Churn" class="imagen-proyecto">
+                    <img src="roc.png" alt="Curva ROC" class="imagen-proyecto">
+                </div>
+                
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <h4>🎯 Métricas Finales de Prueba</h4>
+                        <ul>
+                            <li><strong>ROC AUC (Área bajo la curva):</strong> 0.92</li>
+                            <li><strong>Accuracy (Precisión Global):</strong> 0.88 (88% de las predicciones fueron correctas)</li>
+                            <li><strong>Recall (Detección de Abandono):</strong> 0.80 (El 80% de los clientes que se iban fueron identificados)</li>
+                            <li><strong>Optimización:</strong> Se utilizó `GridSearchCV` para encontrar la mejor combinación de hiperparámetros de CatBoost.</li>
+                        </ul>
+
+                        <h4>⚖️ Matriz de Confusión</h4>
+                        <p>El resultado más importante es la minimización de los Falsos Negativos (FN):</p>
+                        <ul>
+                            <li><strong>Verdaderos Positivos (VP):</strong> Clientes que se iban y fueron correctamente identificados (acción de marketing exitosa).</li>
+                            <li><strong>Falsos Negativos (FN):</strong> Clientes que se iban pero el modelo <strong>falló</strong> en detectar. Estos representan la pérdida de ingresos más directa.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="metricas-destacadas">
+                    <h4>📈 Interpretación de Resultados</h4>
+                    <p><strong>Métricas Clave del Modelo (Test):</strong></p>
+                    <p>
+                        <strong>ROC AUC (Rendimiento):</strong> 0.92<br>
+                        <strong>Recall (Estrategia de Retención):</strong> 80%
+                    </p>
+                    <p>
+                        El <strong>CatBoostClassifier</strong> demostró un rendimiento <strong>excelente (ROC AUC de 0.92)</strong>. El valor de <strong>Recall del 80%</strong> es crucial para el negocio, ya que significa que 8 de cada 10 clientes con intención de cancelar fueron detectados por el modelo.
+                    </p>
+                    <p>
+                        Esta alta capacidad de detección permite al equipo de marketing actuar de manera <strong>proactiva</strong>, lanzando ofertas personalizadas. Dado que la pérdida de un cliente es más costosa que una promoción innecesaria (Falso Positivo), priorizar el Recall por encima del 80% fue la decisión estratégica clave.
+                    </p>
+                </div>
+                    
+                <button class="btn" onclick="toggleProyecto('procesoChurn')">📖 Metodología y Detalles Técnicos</button>
+            
+                <div class="card proyecto" id="procesoChurn">
+                    
+                    <h3>💡 Metodología Utilizada</h3>
+                    <p>
+                        El proyecto siguió la metodología CRISP-DM. Los datos de las cuatro fuentes fueron unidos y preprocesados para crear un conjunto único de características para la clasificación, que se abordó como un desafío de <strong>Clasificación Binaria</strong> (Churn: Sí o No).
+                    </p>
+
+                    <h4>🛠️ Pasos Clave</h4>
+                    <ul>
+                        <li><strong>Fusión de Datos:</strong> Los archivos `contract`, `personal`, `internet` y `phone` fueron fusionados utilizando el `customerID`.</li>
+                        <li><strong>Limpieza:</strong> Se manejaron valores atípicos y valores nulos, especialmente en la columna `TotalCharges`, convirtiendo el tipo de dato.</li>
+                        <li><strong>Modelado con CatBoost:</strong> Se utilizó CatBoost ya que <strong>maneja automáticamente</strong> las variables categóricas, simplificando el *pipeline* de preprocesamiento (no se necesitó *One-Hot Encoding* manual).</li>
+                        <li><strong>Optimización:</strong> Se usó `GridSearchCV` para ajustar la profundidad del árbol y el número de iteraciones, maximizando el <strong>ROC AUC</strong>.</li>
+                    </ul>
+
+                    <h4>📐 Métrica de Evaluación</h4>
+                    <p>
+                        La métrica principal utilizada fue el <strong>ROC AUC</strong>, ya que es robusta ante el desbalance de clases (la mayoría de los clientes *no* cancelan). El objetivo del negocio fue maximizar esta métrica para asegurar que el modelo pudiera distinguir con alta fiabilidad entre clientes en riesgo y clientes fieles.
+                    </p>
+                    
+                    <hr>
+                    
+                    <div>
+                        <h3>Implicaciones de Negocio</h3>
+                        
+                        <p>
+                            El modelo es una herramienta, no un oráculo. La métrica elegida refleja la estrategia de la empresa.
+                        </p>
+
+                        <h4>Balance de Costos: Recall vs. Precision</h4>
+                        <ul>
+                            <li>
+                                <strong>Alto Recall (80%):</strong> Minimiza la pérdida de clientes (<strong>Falsos Negativos</strong>). Estratégicamente, esto es lo más importante para la retención.
+                            </li>
+                            <li>
+                                <strong>Costo de Falsos Positivos:</strong> Clientes que no iban a irse y recibieron una promoción. Esto es un costo de marketing, pero aceptable si el beneficio de retener a 8/10 en riesgo es mayor.
+                            </li>
+                        </ul>
+                        
+                        <p>
+                            <strong>Conclusión:</strong> Un modelo con alto ROC AUC y un <strong>Recall priorizado</strong> por encima del 80% es la mejor aproximación para una estrategia de retención proactiva.
+                        </p>
+                    </div>
+                    <hr>
+                    
+                  
+                </div>
+            </div>
+
+            <button class="btn-proyecto-seguros" onclick="toggleProyecto('proyecto4')">🛡️ Análisis de Seguros con Machine Learning</button>
+
+            <div class="card proyecto" id="proyecto4">
+                <p>
+                    Este proyecto para la compañía de seguros <strong>Sure Tomorrow</strong> aborda cuatro tareas principales utilizando técnicas de machine learning para mejorar el marketing, la predicción de beneficios y la protección de datos.
+                </p>
+
+                <div class="descripcion-librerias">
+                    <h4>🧪 Herramientas utilizadas</h4>
+                    <p>El análisis fue desarrollado en <strong>Python</strong>, empleando:</p>
+                    <ul>
+                        <li><strong>Pandas</strong> y <strong>NumPy</strong> para manipulación y análisis de datos</li>
+                        <li><strong>Scikit-learn</strong> para modelos de machine learning (k-NN, Regresión Lineal)</li>
+                        <li><strong>Seaborn</strong> y <strong>Matplotlib</strong> para visualización</li>
+                        <li><strong>Álgebra lineal</strong> para demostraciones analíticas</li>
+                    </ul>
+                </div>
+
+                <div class="tarea">
+                    <h4>📋 Tarea 1: Encontrar clientes similares</h4>
+                    <p><strong>Objetivo:</strong> Identificar clientes similares a uno determinado para mejorar las estrategias de marketing.</p>
+                    
+                    <h5>🔍 Metodología:</h5>
+                    <ul>
+                        <li>Utilización del algoritmo <strong>k-NN (k-Nearest Neighbors)</strong></li>
+                        <li>Comparación de métricas de distancia: <strong>Euclidiana vs Manhattan</strong></li>
+                        <li>Escalado de datos para normalizar las características</li>
+                    </ul>
+                    
+                    <h5>📊 Resultados:</h5>
+                    <ul>
+                        <li>El escalado de datos <strong>afecta significativamente</strong> los resultados de k-NN</li>
+                        <li>Variables como 'income' sin escalar pueden dominar el cálculo de distancias</li>
+                        <li>Ambas métricas de distancia (Euclidiana y Manhattan) seleccionan valores similares</li>
+                    </ul>
+                </div>
+
+                <div class="tarea">
+                    <h4>🎯 Tarea 2: Predecir recepción de prestaciones del seguro</h4>
+                    <p><strong>Objetivo:</strong> Clasificar si un cliente recibirá beneficios del seguro usando k-NN vs modelo dummy.</p>
+                    
+                    <h5>🔍 Metodología:</h5>
+                    <ul>
+                        <li>Problema de <strong>clasificación binaria</strong> (insurance_benefits > 0)</li>
+                        <li>Evaluación con métrica <strong>F1</strong> para k=1...10</li>
+                        <li>Comparación con modelo dummy con diferentes probabilidades</li>
+                    </ul>
+                    
+                    <div class="math-formula">
+                        <p>Probabilidad de recibir prestación:</p>
+                        \[
+                        P\{\text{prestación recibida}\} = \frac{\text{número de clientes con prestación}}{\text{número total de clientes}}
+                        \]
+                    </div>
+                    
+                    <h5>📊 Resultados:</h5>
+                    <ul>
+                        <li>El modelo <strong>k-NN supera significativamente</strong> al modelo dummy</li>
+                        <li>Capacidad de identificar patrones en los datos para predecir casos positivos y negativos</li>
+                        <li>Validación de la efectividad del enfoque de clasificación</li>
+                    </ul>
+                </div>
+
+                <div class="tarea">
+                    <h4>📈 Tarea 3: Regresión lineal para predecir número de prestaciones</h4>
+                    <p><strong>Objetivo:</strong> Predecir el número de prestaciones de seguro usando regresión lineal.</p>
+                    
+                    <h5>🔍 Metodología:</h5>
+                    <ul>
+                        <li>Implementación de <strong>regresión lineal</strong> desde principios fundamentales</li>
+                        <li>Uso de <strong>RECM (RMSE)</strong> como métrica de evaluación</li>
+                        <li>Comparación entre datos originales y escalados</li>
+                    </ul>
+                    
+                    <div class="math-formula">
+                        <p>Formulación matricial de regresión lineal:</p>
+                        \[
+                        y = Xw
+                        \]
+                        <p>Solución analítica para los pesos:</p>
+                        \[
+                        w = (X^T X)^{-1} X^T y
+                        \]
+                        <p>Valores predichos:</p>
+                        \[
+                        \hat{y} = X_{val} w
+                        \]
+                    </div>
+                    
+                    <h5>📊 Resultados:</h5>
+                    <ul>
+                        <li>Evaluación de RECM para diferentes configuraciones</li>
+                        <li>Análisis del impacto del escalado en el modelo</li>
+                        <li>Validación del enfoque de regresión para predecir beneficios</li>
+                    </ul>
+                </div>
+
+                <div class="tarea">
+                    <h4>🔒 Tarea 4: Ofuscación de datos personales</h4>
+                    <p><strong>Objetivo:</strong> Proteger datos personales sin afectar la calidad del modelo de regresión.</p>
+                    
+                    <h5>🔍 Metodología:</h5>
+                    <ul>
+                        <li>Desarrollo de algoritmo de <strong>transformación de datos</strong></li>
+                        <li>Uso de matrices invertibles para ofuscar datos</li>
+                        <li>Demostración analítica de que la ofuscación no afecta las predicciones</li>
+                    </ul>
+                    
+                    <div class="math-formula">
+                        <p>Datos ofuscados: \( XP \) en lugar de \( X \)</p>
+                        <p>Nuevos pesos con datos ofuscados:</p>
+                        \[
+                        w_P = [(XP)^T (XP)]^{-1} (XP)^T y
+                        \]
+                        <p>Simplificación usando propiedades matriciales:</p>
+                        \[
+                        w_P = (P^T X^T X P)^{-1} P^T X^T y
+                        \]
+                    </div>
+                    
+                    <h5>📊 Resultados:</h5>
+                    <ul>
+                        <li><strong>Demostración analítica</strong> de que las predicciones permanecen iguales</li>
+                        <li>Validación computacional con métricas RMSE y \( R^2 \)</li>
+                        <li>Algoritmo efectivo para proteger datos sin comprometer el modelo</li>
+                    </ul>
+                </div>
+
+                <div class="metricas-destacadas">
+                    <h4>🎯 Conclusiones Generales</h4>
+		    <img src="ofusca.png" alt="ofus" class="imagen-proyecto">
+<ul>
+    <li><strong>k-NN</strong> demostró ser efectivo para encontrar clientes similares y clasificación</li>
+    <li>La <strong>regresión lineal</strong> proporcionó predicciones confiables del número de prestaciones</li>
+    <li>Se desarrolló con éxito un método de <strong>ofuscación de datos</strong> que preserva la utilidad del modelo</li>
+    <li>El escalado de datos es <strong>crítico</strong> para el rendimiento de algoritmos basados en distancias</li>
+    <li>Conclusiones del modelo ofuscado:
+        <ol>
+            <li>Ambos modelos obtienen exactamente el mismo desempeño:
+                <ul>
+                    <li><strong>MSE:</strong> 0.01216348</li>
+                    <li><strong>R²:</strong> 0.43</li>
+                </ul>
+            </li>
+            <li>La transformación ofuscada no afecta la capacidad predictiva del modelo, ya que la matriz aleatoria <em>P</em> es invertible.</li>
+            <li>Las relaciones entre las variables se conservan, incluso después de la transformación lineal.</li>
+            <li>Las diferencias en los coeficientes reflejan el cambio de base en el espacio de características, pero no alteran la calidad del ajuste.</li>
+        </ol>
+    </li>
+</ul>
+                </div>
+
+                <button class="btn" onclick="toggleProyecto('procesoSeguros')">📖 Demostración Analítica Detallada</button>
+            
+                <div class="card proyecto" id="procesoSeguros">
+                    <h3>🧠 Demostración Analítica: Ofuscación de Datos</h3>
+                    
+                    <h4>🔍 Prueba de que la ofuscación no afecta la regresión lineal</h4>
+                    
+                    <div class="math-formula">
+                        <p><strong>Problema:</strong> Demostrar que la transformación \( X \rightarrow XP \) no afecta las predicciones de regresión lineal.</p>
+                        
+                        <p><strong>Datos originales:</strong></p>
+                        \[
+                        w = (X^T X)^{-1} X^T y
+                        \]
+                        \[
+                        \hat{y} = Xw
+                        \]
+                        
+                        <p><strong>Datos ofuscados:</strong></p>
+                        \[
+                        w_P = [(XP)^T (XP)]^{-1} (XP)^T y
+                        \]
+                        \[
+                        \hat{y}_P = (XP) w_P
+                        \]
+                        
+                        <p><strong>Simplificación de \( w_P \):</strong></p>
+                        \[
+                        w_P = [P^T X^T X P]^{-1} P^T X^T y
+                        \]
+                        
+                        <p>Usando la propiedad \( (AB)^{-1} = B^{-1} A^{-1} \):</p>
+                        \[
+                        w_P = P^{-1} (X^T X)^{-1} (P^T)^{-1} P^T X^T y
+                        \]
+                        
+                        <p>Simplificando \( (P^T)^{-1} P^T = I \):</p>
+                        \[
+                        w_P = P^{-1} (X^T X)^{-1} X^T y
+                        \]
+                        \[
+                        w_P = P^{-1} w
+                        \]
+                        
+                        <p><strong>Predicciones con datos ofuscados:</strong></p>
+                        \[
+                        \hat{y}_P = (XP) w_P = (XP) (P^{-1} w) = X (P P^{-1}) w = X I w = X w = \hat{y}
+                        \]
+                        
+                        <p><strong>Conclusión:</strong> \( \hat{y}_P = \hat{y} \) - Las predicciones son idénticas.</p>
+                    </div>
+                    
+                    <div>
+                        <h4> Implicaciones Prácticas</h4>
+                        <p>Esta demostración tiene importantes implicaciones para la <strong>protección de datos</strong>:</p>
+                        <ul>
+                            <li>Los datos personales pueden transformarse sin afectar los modelos predictivos</li>
+                            <li>La <strong>confidencialidad</strong> se mantiene mientras se preserva la <strong>utilidad</strong> analítica</li>
+                            <li>Método aplicable a cualquier algoritmo que use soluciones de forma cerrada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacto">
+            <h2>📫 Contacto</h2>
+            <div class="card">
+                <p><strong>Tel:</strong> <a href="tel:+527226821016">+52 722 682 1016</a></p>
+                <p><strong>Email:</strong> <a href="mailto:juancarloscolin456@gmail.com">juancarloscolin456@gmail.com</a></p>
+                <p><strong>Ubicación:</strong> Toluca, Estado de México, México</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/juan-carlos-colin-medina-4922a72a3" target="_blank">Juan Carlos Colín Medina</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/Bortone-lab" target="_blank">Bortone-lab</a></p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
